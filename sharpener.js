@@ -43,8 +43,14 @@ function onsubmit(e) {
     }else{
         const li= document.createElement('li');
         li.appendChild(document.createTextNode(`${nameInput.value} : ${emailInput.value}`));
-        localStorage.setItem('userName', nameInput.value);
-        localStorage.setItem('userEmail', emailInput.value);
+        let myobj = {
+            userName: nameInput.value,
+            userEmail: emailInput.value
+        }
+        let localstorage_serialized = JSON.stringify(myobj);
+        localStorage.setItem('userDetail', localstorage_serialized);
+        let localstorage_deserialized = JSON.parse(localStorage.getItem('userDetail'));
+        console.log(localstorage_deserialized);
         
 
         userList.appendChild(li);
