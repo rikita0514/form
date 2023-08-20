@@ -47,13 +47,18 @@ function onsubmit(e) {
             userName: nameInput.value,
             userEmail: emailInput.value
         }
-        let localstorage_serialized = JSON.stringify(myobj);
-        localStorage.setItem('userDetail', localstorage_serialized);
-        let localstorage_deserialized = JSON.parse(localStorage.getItem('userDetail'));
-        console.log(localstorage_deserialized);
         
+        let existingData = localStorage.getItem('userDetail');
+        let dataArray = existingData ? JSON.parse(existingData) : [];
+
+        // Add new data entry to the array
+        dataArray.push(myobj);
+
+        // Store the updated array back in local storage
+        localStorage.setItem(nameInput.value, JSON.stringify(dataArray));
 
         userList.appendChild(li);
+        userList.appendChild(document.createElement('br'));
 
         nameInput.value='';
         emailInput.value='';
