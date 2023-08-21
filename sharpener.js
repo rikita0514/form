@@ -30,6 +30,7 @@ const msg= document.querySelector('.msg');
 const userList= document.querySelector('#users');
 
 myform.addEventListener('submit', onsubmit);
+userList.addEventListener('click', removeItem);
 
 function onsubmit(e) {
     e.preventDefault();
@@ -57,8 +58,20 @@ function onsubmit(e) {
         // Store the updated array back in local storage
         localStorage.setItem(nameInput.value, JSON.stringify(dataArray));
 
+        // creating a delete button
+        var deleteButton= document.createElement('button');
+        deleteButton.className = 'btn-default btn-outline-secondary btn-sm float-right';
+        deleteButton.appendChild(document.createTextNode('Delete'));
+        deleteButton.onclick = () => {
+            localStorage.removeItem(myobj.userName);
+            userList.removeChild(li);
+        }
+        li.appendChild(deleteButton);
+
         userList.appendChild(li);
         userList.appendChild(document.createElement('br'));
+
+        
 
         nameInput.value='';
         emailInput.value='';
