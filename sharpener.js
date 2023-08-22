@@ -68,6 +68,18 @@ function onsubmit(e) {
         }
         li.appendChild(deleteButton);
 
+        var editButton= document.createElement('button');
+        editButton.className = 'btn-default btn-outline-secondary btn-sm float-right';
+        editButton.appendChild(document.createTextNode('Edit'));
+        editButton.onclick = () => {
+            localStorage.removeItem(myobj.userName);
+            userList.removeChild(li);
+            nameInput.value = myobj.userName;
+            emailInput.value = myobj.userEmail;
+
+        }
+        li.appendChild(editButton);
+
         userList.appendChild(li);
         userList.appendChild(document.createElement('br'));
 
